@@ -26,6 +26,7 @@ if ($result = $result->fetch()) {
     $description = $result['Description'];
     $goal = $result['SommeNecessaire'];
     $creatorId = $result['ID_Initiateur'];
+
 } else {
     ?>
     <div class="container">
@@ -85,6 +86,9 @@ $totalInvestNb = $totalInvestNb['NbInvest'];
         </div>
 
     </div>
+    <a class="btn btn-default" href="GenPDF.php?id=<?php echo $_GET['id']; ?>" role="button"><span
+            class="glyphicon glyphicon-repeat"
+            aria-hidden="true"></span> Génerer un PDF</a>
     <div class="row">
         </br>
         <?php
