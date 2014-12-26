@@ -76,11 +76,18 @@ $totalInvestNb = $totalInvestNb['NbInvest'];
                 <?php
                 } else {
                     ?>
-                    <a class="btn btn-default" href="invest.php?id=<?php echo $_GET['id']; ?>&mode=new" role="button"><span
+                    <a class="btn btn-default" href="invest.php?id=<?php echo $_GET['id']; ?>&mode=new"
+                       role="button"><span
                             class="glyphicon glyphicon-plus"
                             aria-hidden="true"></span> Investir</a>
                 <?php
                 }
+            } elseif ($_SESSION['accountType'] == 'initiateur' && $_SESSION['id'] == $creatorId) {
+                ?>
+                <a class="btn btn-default" href="supprProjet.php?id=<?php echo $_GET['id']; ?>&mode=new" role="button"><span
+                        class="glyphicon glyphicon-plus"
+                        aria-hidden="true"></span> Supprimer le projet</a>
+            <?php
             }
             ?>
         </div>
