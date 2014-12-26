@@ -64,10 +64,7 @@ $db = new PDO($server . ':host=' . $host . ';dbname=' . $base, $user, $pass);
     ?>
     <table class="table">
         <tr>
-            <td><b>Nom</b></td>
-            <td><b>Objectif</b></td>
-            <td><b>Montant actuel</b></td>
-            <td><b>Contributeurs</b></td>
+            <td><b>Projets</b></td>
         </tr>
         <?php
         $request = null;
@@ -92,10 +89,7 @@ $db = new PDO($server . ':host=' . $host . ';dbname=' . $base, $user, $pass);
         $result = $db->query($request);
         if ($array = $result->fetchAll()) {
             foreach ($array as $line) {
-                echo '<tr><td><a class="table" href="see_project.php?id=' . $line['ID'] . '">' . $line['Nom'] . '</a></td>';
-                echo '<td>' . $line['SommeNecessaire'] . '</td>';
-                echo '<td>TBA</td>';
-                echo '<td>TBA</td></tr>';
+                echo '<tr><td><a class="table" href="see_project.php?id=' . $line['ID'] . '">' . $line['Nom'] . '</a></td></tr>';
             }
         }
         ?>

@@ -44,10 +44,6 @@ if (!isset($_SESSION['id']) || $_SESSION['accountType'] == 'initiateur' ) {
         $investNb = $investNb['Compte'];
 
         if (!empty($_SESSION['bank'])){
-            if($investNb >= 1){
-                $errorMessage = 'Vous ne pouvez pas investir plus d\'une fois sur un projet.';
-
-            }
 
             if(empty($_POST['invest'])){
                 $errorMessage = 'Vous devez spécifier un montant.';
@@ -70,8 +66,14 @@ if (!isset($_SESSION['id']) || $_SESSION['accountType'] == 'initiateur' ) {
         }
 
         if ($errorMessage == null) {
-            $request4 = 'INSERT INTO investissement (ID_Investisseur, ID_Projet, Montant) VALUES ('.$_SESSION['id'].', '.$projectId.', '.$invest.')';
-            $db->query($request4);
+            if($investNb >= 1){
+                $request4 = 'UPDATE investissement SET Montant = '.$invest.' WHERE ID_Projet='.$projectId.' AND ID_Investisseur='.$_SESSION['id'].';';
+                $db->query($request4);
+
+            } else {
+                $request5 = 'INSERT INTO investissement (ID_Investisseur, ID_Projet, Montant) VALUES ('.$_SESSION['id'].', '.$projectId.', '.$invest.')';
+                $db->query($request5);
+            }
 
             echo '<div class="alert alert-success" role="alert">Votre investissement à bien été enregistré.</div>';
             include('footer.php');

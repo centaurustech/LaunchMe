@@ -47,13 +47,19 @@ $totalInvestNb = $totalInvestNb->fetch();
 $totalInvestNb = $totalInvestNb['NbInvest'];
 
 ?>
+<div class="jumbotron">
+    <div class="container">
+        <h1><?php echo $name; ?></h1>
+        <p>
+            <?php echo $description; ?>
+
+        </p>
+    </div>
+</div>
 
 <div class="container">
-    <h1>Projet</h1>
 
     <div class="row">
-        <h2><?php echo $name; ?></h2>
-
         <div class="col-lg-4">
             <h3>Objectif : <?php echo $goal; ?> €</h3>
         </div>
@@ -63,7 +69,7 @@ $totalInvestNb = $totalInvestNb['NbInvest'];
         <div class="col-lg-4" style="text-align: right">
             <?php
             if ($_SESSION['accountType'] == 'investisseur') {
-                $request3 = 'SELECT COUNT(ID) AS Compte FROM investissement WHERE ID_Investisseur=' . $_SESSION['id'] . ';';
+                $request3 = 'SELECT COUNT(ID) AS Compte FROM investissement WHERE ID_Projet='.$projectId.';';
                 $investNb = $db->query($request3);
                 $investNb = $investNb->fetch();
                 $investNb = $investNb['Compte'];
@@ -93,9 +99,6 @@ $totalInvestNb = $totalInvestNb['NbInvest'];
         </div>
 
     </div>
-    <a class="btn btn-default" href="GenPDF.php?id=<?php echo $_GET['id']; ?>" role="button"><span
-            class="glyphicon glyphicon-repeat"
-            aria-hidden="true"></span> Génerer un PDF</a>
     <div class="row">
         </br>
         <?php
@@ -112,13 +115,12 @@ $totalInvestNb = $totalInvestNb['NbInvest'];
             </div>
         </div>
     </div>
-    <p>
-        <?php echo $description; ?>
-
-    </p>
     <nav>
         <ul class="pager">
             <li class="previous"><a href="projects.php"><span aria-hidden="true">&larr;</span> Retour</a></li>
+            <li class="next"><a href="GenPDF.php?id=<?php echo $_GET['id']; ?>" role="button"><span
+                    class="glyphicon glyphicon-repeat"
+                    aria-hidden="true"></span> Génerer un PDF</a></li>
         </ul>
     </nav>
 </div>
